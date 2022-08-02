@@ -1,6 +1,6 @@
-import {useEffect, useState} from "react";
-import {IProduct} from "../types/types";
-import axios, {AxiosError} from "axios";
+import { useEffect, useState } from 'react'
+import { IProduct } from '../types/types'
+import axios, { AxiosError } from 'axios'
 
 export const useProducts = () => {
     const [products, setProducts] = useState<IProduct[]>([])
@@ -15,7 +15,7 @@ export const useProducts = () => {
         try {
             setError('')
             setLoading(true)
-            const response = await axios.get<IProduct[]>('https://fakestoreapi.com/products?limit=5')
+            const response = await axios.get<IProduct[]>('https://fakestoreapi.com/products')
             setProducts(response.data)
             setLoading(false)
         } catch (e: unknown) {
@@ -27,7 +27,7 @@ export const useProducts = () => {
 
     useEffect(() => {
         fetchProducts()
-    }, []);
+    }, [])
 
-    return {products, loading, error , addProduct}
+    return { products, loading, error, addProduct }
 }
