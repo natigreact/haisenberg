@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom'
 const navigation = [
     { name: 'Home', link: '/', current: true },
     { name: 'Products', link: '/products', current: false },
+    { name: 'users', link: '/users', current: false },
 ]
 
 const activeClassName = 'bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'
