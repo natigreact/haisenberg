@@ -42,7 +42,11 @@ export const CreateProduct: React.FC<ICreateProductProps> = ({ onCreate }) => {
             category,
         }
 
-        const response = await axios.post<IProduct>('https://fakestoreapi.com/products', productData)
+        const response = await axios.post<IProduct>('http://localhost:4200/api/products', productData, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
 
         onCreate(response.data)
 

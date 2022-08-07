@@ -15,7 +15,7 @@ export const useProducts = () => {
         try {
             setError('')
             setLoading(true)
-            const response = await axios.get<IProduct[]>('https://fakestoreapi.com/products')
+            const response = await axios.get<IProduct[]>('http://localhost:4200/api/products')
             setProducts(response.data)
             setLoading(false)
         } catch (e: unknown) {

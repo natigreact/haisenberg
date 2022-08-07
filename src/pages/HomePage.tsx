@@ -1,7 +1,6 @@
 import React from 'react'
 
 export const HomePage = () => {
-
     return (
         <div className='bg-hero-pattern h-[calc(100vh-64px)] flex bg-cover'>
             <header className='bg-amber-400 shadow'>

@@ -1,12 +1,12 @@
-import { Fragment } from 'react'
+import React, { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { NavLink } from 'react-router-dom'
+import { IUser } from '../types/types'
 
 const navigation = [
-    { name: 'Home', link: '/', current: true },
-    { name: 'Products', link: '/products', current: false },
-    { name: 'users', link: '/users', current: false },
+    { id: 1, name: 'Home', link: '/', current: true },
+    { id: 2, name: 'Products', link: '/products', current: false },
 ]
 
 const activeClassName = 'bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'
@@ -19,7 +19,13 @@ function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
 }
 
-export const Navigation = () => {
+interface INavigationProps {
+    signOut: () => void
+    user: IUser
+}
+
+export const Navigation: React.FC<INavigationProps> = ({ signOut, user }) => {
+
     return (
         <Disclosure as='nav' className='bg-gray-800 sticky top-0 z-10'>
             {({ open }) => (
@@ -51,7 +57,7 @@ export const Navigation = () => {
                                     <div className='flex space-x-4'>
                                         {navigation.map((item) => (
                                             <NavLink
-                                                key={item.name}
+                                                key={item.id}
                                                 to={item.link}
                                                 className={({ isActive }) =>
                                                     isActive ? activeClassName : className
@@ -103,7 +109,7 @@ export const Navigation = () => {
                                                         href='#'
                                                         className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                                     >
-                                                        Your Profile
+                                                        Welcome {user.name}
                                                     </a>
                                                 )}
                                             </Menu.Item>
@@ -122,6 +128,7 @@ export const Navigation = () => {
                                                     <a
                                                         href='#'
                                                         className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                        onClick={signOut}
                                                     >
                                                         Sign out
                                                     </a>
@@ -137,7 +144,7 @@ export const Navigation = () => {
                         <div className='px-2 pt-2 pb-3 space-y-1'>
                             {navigation.map((item) => (
                                 <NavLink
-                                    key={item.name}
+                                    key={item.id}
                                     to={item.link}
                                     className={({ isActive }) =>
                                         isActive ? activeMobileClassName : mobileClassName
