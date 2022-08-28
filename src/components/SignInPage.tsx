@@ -33,8 +33,8 @@ export const SignInPage: React.FC<ISignInProps> = ({ signIn, logInHandler }) => 
     }, 3000, { 'trailing': false }))
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className='mt-5 flex flex-col'>
-            <input placeholder='Enter User Name'
+        <form onSubmit={handleSubmit(onSubmit)} className='container mt-5 flex flex-col'>
+            <input placeholder='Enter Your Name'
                    type='text'
                    className='border py-2 px-4 mb-2 w-full outline-0'
                    {...register('userName', {
@@ -46,7 +46,7 @@ export const SignInPage: React.FC<ISignInProps> = ({ signIn, logInHandler }) => 
             <div className='mt-1 relative rounded-md shadow-sm'>
                 <input type='password'
                        className='border py-2 px-5 mb-2 w-full outline-0'
-                       placeholder='0.00'
+                       placeholder='Enter Password'
                        {...register('password', {
                            required: 'password is required',
                        })}

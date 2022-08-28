@@ -10,7 +10,16 @@ export interface IProduct {
     description: string
     category: string
     image: string
-    rating: IRating
+    rating?: IRating
+}
+
+export interface IAccessories {
+    id?: number
+    title: string
+    price: number
+    description: string
+    category: string
+    image: string
 }
 
 export interface IUser {
