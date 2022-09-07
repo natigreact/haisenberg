@@ -3,24 +3,28 @@ import { Route, Routes } from 'react-router-dom'
 import { HomePage } from './pages/HomePage'
 import { ProductsPage } from './pages/ProductsPage'
 import { Navigation } from './components/Navigation'
-import { useAuth } from './hooks/useAuth'
 import { LoginPage } from './pages/LoginPage'
+import { ProductDetailPage } from './pages/ProductDetailPage'
+import { useTypedSelector } from './hooks/useTypedSelector'
+import { SettingsPage } from './pages/SettingsPage'
 
 export const App = () => {
-    const { user, signOut, signIn } = useAuth()
+    const { isAuth } = useTypedSelector(state => state.auth)
 
     return (
         <>
-            {user ? (
+            {isAuth ? (
                 <>
-                    <Navigation signOut={signOut} user={user} />
+                    <Navigation />
                     <Routes>
                         <Route path='/' element={<HomePage />} />
                         <Route path='/products' element={<ProductsPage />} />
+                        <Route path='/products/:id' element={<ProductDetailPage />} />
+                        <Route path='/settings' element={<SettingsPage />} />
                     </Routes>
                 </>
             ) : (
-                <LoginPage signIn={signIn} />
+                <LoginPage />
             )
             }
         </>

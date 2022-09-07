@@ -1,6 +1,5 @@
 import React from 'react'
 import { IProduct } from '../types/types'
-import axios from 'axios'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { throttle } from 'lodash'
 
@@ -42,13 +41,7 @@ export const CreateProduct: React.FC<ICreateProductProps> = ({ onCreate }) => {
             category,
         }
 
-        const response = await axios.post<IProduct>('http://localhost:4200/api/products', productData, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-
-        onCreate(response.data)
+        onCreate(productData)
 
     }, 3000, { 'trailing': false }))
 

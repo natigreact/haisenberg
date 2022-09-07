@@ -3,11 +3,8 @@ import { ModalContext } from '../context/ModalContext'
 import { Modal } from '../components/Modal'
 import { SignInPage } from '../components/SignInPage'
 
-interface ILoginPageProps {
-    signIn: (userName: string, password: string) => any
-}
 
-export const LoginPage: React.FC<ILoginPageProps> = ({ signIn }) => {
+export const LoginPage = () => {
     const { modal, openModal, closeModal } = useContext(ModalContext)
 
     const logInHandler = () => {
@@ -34,7 +31,7 @@ export const LoginPage: React.FC<ILoginPageProps> = ({ signIn }) => {
                     </button>
                     {modal &&
                         <Modal title='Sign In' onClose={closeModal}>
-                            <SignInPage signIn={signIn} logInHandler={logInHandler} />
+                            <SignInPage logInHandler={logInHandler} />
                         </Modal>
                     }
                 </div>

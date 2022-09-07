@@ -9,10 +9,10 @@ export const useAuth = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
 
-    const signIn = (userName: string, password: string) => {
+    const signIn = (username: string, password: string) => {
         try {
             axios.post(`http://localhost:4200/auth/login`, {
-                    'username': userName,
+                    'username': username,
                     'password': password,
                 }, {
                     headers: {

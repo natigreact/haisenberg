@@ -1,26 +1,26 @@
 import { IProduct } from '../../types/types'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-interface ProductState {
+interface ProductsState {
     loading: boolean
     error: string
     products: IProduct[]
 }
 
-const initialState: ProductState = {
+const initialState: ProductsState = {
     loading: false,
     error: '',
     products: [],
 }
 
-export const productSlice = createSlice({
-    name: 'product',
+export const productsSlice = createSlice({
+    name: 'products',
     initialState,
     reducers: {
         fetching(state) {
             state.loading = true
         },
-        fetchSuccess(state, action: PayloadAction<IProduct[]>) {
+        fetchProductsSuccess(state, action: PayloadAction<IProduct[]>) {
             state.loading = false
             state.products = action.payload
         },
@@ -31,7 +31,10 @@ export const productSlice = createSlice({
         addProduct(state, action) {
             state.products.push({ ...action.payload })
         },
+        removeProduct(state, action) {
+            state.products.filter(product => product._id !== action.payload.id)
+        },
     },
 })
 
-export default productSlice.reducer
+export default productsSlice.reducer

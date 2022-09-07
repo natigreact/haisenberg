@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
-import { NavLink } from 'react-router-dom'
-import { IUser } from '../types/types'
+import { Link, NavLink } from 'react-router-dom'
+import { useTypedDispatch, useTypedSelector } from '../hooks/useTypedSelector'
+import { authSlice } from '../store/slices/authSlice'
 
 const navigation = [
     { id: 1, name: 'Home', link: '/', current: true },
@@ -19,12 +20,15 @@ function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
 }
 
-interface INavigationProps {
-    signOut: () => void
-    user: IUser
-}
 
-export const Navigation: React.FC<INavigationProps> = ({ signOut, user }) => {
+export const Navigation = () => {
+    const dispatch = useTypedDispatch()
+    const { username } = useTypedSelector(state => state.auth)
+
+    const signOut = (e: React.SyntheticEvent<EventTarget>) => {
+        e.preventDefault()
+        dispatch(authSlice.actions.logout())
+    }
 
     return (
         <Disclosure as='nav' className='bg-gray-800 sticky top-0 z-10'>
@@ -105,22 +109,42 @@ export const Navigation: React.FC<INavigationProps> = ({ signOut, user }) => {
                                             className='origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'>
                                             <Menu.Item>
                                                 {({ active }) => (
-                                                    <a
-                                                        href='#'
+                                                    <Link
+                                                        to='#'
                                                         className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                                     >
-                                                        Welcome {user.name}
-                                                    </a>
+                                                        Welcome {username}
+                                                    </Link>
                                                 )}
                                             </Menu.Item>
                                             <Menu.Item>
                                                 {({ active }) => (
-                                                    <a
-                                                        href='#'
+                                                    <Link
+                                                        to='/'
+                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                    >
+                                                        Home
+                                                    </Link>
+                                                )}
+                                            </Menu.Item>
+                                            <Menu.Item>
+                                                {({ active }) => (
+                                                    <Link
+                                                        to='/products'
+                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                    >
+                                                        Products
+                                                    </Link>
+                                                )}
+                                            </Menu.Item>
+                                            <Menu.Item>
+                                                {({ active }) => (
+                                                    <Link
+                                                        to='/settings'
                                                         className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                                     >
                                                         Settings
-                                                    </a>
+                                                    </Link>
                                                 )}
                                             </Menu.Item>
                                             <Menu.Item>
@@ -137,6 +161,7 @@ export const Navigation: React.FC<INavigationProps> = ({ signOut, user }) => {
                                         </Menu.Items>
                                     </Transition>
                                 </Menu>
+                                <span className='text-gray-300 ml-5 hover:text-white cursor-default'>{username}</span>
                             </div>
                         </div>
                     </div>

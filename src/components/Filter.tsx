@@ -7,7 +7,7 @@ interface IFilterProps {
 
 export const Filter: React.FC<IFilterProps> = ({ setFilteredProducts }: any) => {
     const [name, setName] = useState('')
-    const { products } = useTypedSelector(state => state.data)
+    const { products } = useTypedSelector(state => state.products)
 
     const filter = (e: any) => {
         const keyword = e.target.value

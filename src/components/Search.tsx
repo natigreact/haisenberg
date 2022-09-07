@@ -6,11 +6,16 @@ import { IProduct } from '../types/types'
 
 export const Search = () => {
     const input = useInput('')
+    const [products, setProducts] = useState<IProduct[]>([])
     const debounced = useDebounce<string>(input.value, 400)
 
     async function searchProducts() {
-        const response = await axios.get<IProduct>('products', { params: { search: debounced } })
-        console.log(response.data)
+        const response = await axios.get<IProduct>('products', {
+            params: {
+                search: debounced
+            },
+        })
+        /*setProducts(response.data)*/
     }
 
     useEffect(() => {

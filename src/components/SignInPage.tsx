@@ -1,18 +1,19 @@
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { throttle } from 'lodash'
+import { useTypedDispatch } from '../hooks/useTypedSelector'
+import { login } from '../store/actions/authActions'
 
 interface ISignUserInputs {
-    userName: string
+    username: string
     password: string
 }
 
 interface ISignInProps {
-    signIn: (userName: string, password: string) => any
     logInHandler: any
 }
 
-export const SignInPage: React.FC<ISignInProps> = ({ signIn, logInHandler }) => {
+export const SignInPage: React.FC<ISignInProps> = ({ logInHandler }) => {
     const {
         register,
         formState: { errors },
@@ -22,12 +23,14 @@ export const SignInPage: React.FC<ISignInProps> = ({ signIn, logInHandler }) => 
         mode: 'onChange',
     })
 
+    const dispatch = useTypedDispatch()
+
     const onSubmit: SubmitHandler<ISignUserInputs> = (throttle(async ({
-                                                                          userName,
+                                                                          username,
                                                                           password,
                                                                       }: any): Promise<any> => {
 
-        signIn(userName, password)
+        dispatch(login({ username, password }))
         logInHandler()
 
     }, 3000, { 'trailing': false }))
@@ -37,11 +40,11 @@ export const SignInPage: React.FC<ISignInProps> = ({ signIn, logInHandler }) => 
             <input placeholder='Enter Your Name'
                    type='text'
                    className='border py-2 px-4 mb-2 w-full outline-0'
-                   {...register('userName', {
-                       required: 'userName is required',
+                   {...register('username', {
+                       required: 'username is required',
                    })}
             />
-            {errors.userName && <div style={{ color: 'red' }}>{errors.userName.message}</div>}
+            {errors.username && <div style={{ color: 'red' }}>{errors.username.message}</div>}
 
             <div className='mt-1 relative rounded-md shadow-sm'>
                 <input type='password'
