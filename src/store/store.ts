@@ -3,14 +3,14 @@ import authReducer from './slices/authSlice'
 import productsReducer from './slices/productsSlice'
 
 const rootReducer = combineReducers({
-    products: productsReducer,
-    auth: authReducer,
+  products: productsReducer,
+  auth: authReducer,
 })
 
 export function setupStore() {
-    return configureStore({
-        reducer: rootReducer,
-    })
+  return configureStore({
+    reducer: rootReducer,
+  })
 }
 
 export type RootState = ReturnType<typeof rootReducer>

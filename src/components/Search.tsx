@@ -5,32 +5,32 @@ import axios from 'axios'
 import { IProduct } from '../types/types'
 
 export const Search = () => {
-    const input = useInput('')
-    const [products, setProducts] = useState<IProduct[]>([])
-    const debounced = useDebounce<string>(input.value, 400)
+  const input = useInput('')
+  const [products, setProducts] = useState<IProduct[]>([])
+  const debounced = useDebounce<string>(input.value, 400)
 
-    async function searchProducts() {
-        const response = await axios.get<IProduct>('products', {
-            params: {
-                search: debounced
-            },
-        })
-        /*setProducts(response.data)*/
+  async function searchProducts() {
+    const response = await axios.get<IProduct>('products', {
+      params: {
+        search: debounced,
+      },
+    })
+    /*setProducts(response.mockedData)*/
+  }
+
+  useEffect(() => {
+    if (debounced.length > 3) {
+      searchProducts()
     }
+  }, [debounced])
 
-    useEffect(() => {
-        if (debounced.length > 3) {
-            searchProducts()
-        }
-    }, [debounced])
-
-    return (
-        <div className='py-2 px-4 mb-4'>
-            <input type='text'
-                   className='border py-2 px-4 outline-0 rounded-3xl'
-                   placeholder='Search'
-                   {...input}
-            />
-        </div>
-    )
+  return (
+    <div className='py-2 px-4 mb-4'>
+      <input type='text'
+             className='border py-2 px-4 outline-0 rounded-3xl'
+             placeholder='Search'
+             {...input}
+      />
+    </div>
+  )
 }

@@ -9,24 +9,24 @@ import { useTypedSelector } from './hooks/useTypedSelector'
 import { SettingsPage } from './pages/SettingsPage'
 
 export const App = () => {
-    const { isAuth } = useTypedSelector(state => state.auth)
+  const { isAuth } = useTypedSelector(state => state.auth)
 
-    return (
+  return (
+    <>
+      {isAuth ? (
         <>
-            {isAuth ? (
-                <>
-                    <Navigation />
-                    <Routes>
-                        <Route path='/' element={<HomePage />} />
-                        <Route path='/products' element={<ProductsPage />} />
-                        <Route path='/products/:id' element={<ProductDetailPage />} />
-                        <Route path='/settings' element={<SettingsPage />} />
-                    </Routes>
-                </>
-            ) : (
-                <LoginPage />
-            )
-            }
+          <Navigation />
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/products' element={<ProductsPage />} />
+            <Route path='/products/:id' element={<ProductDetailPage />} />
+            <Route path='/settings' element={<SettingsPage />} />
+          </Routes>
         </>
-    )
+      ) : (
+        <LoginPage />
+      )
+      }
+    </>
+  )
 }

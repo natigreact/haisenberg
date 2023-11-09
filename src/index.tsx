@@ -10,14 +10,14 @@ import { ModalState } from './context/ModalContext'
 const store = setupStore()
 
 const root = ReactDOM.createRoot(
-    document.getElementById('root') as HTMLElement,
+  document.getElementById('root') as HTMLElement,
 )
 root.render(
-    <Provider store={store}>
-        <BrowserRouter>
-            <ModalState>
-                <App />
-            </ModalState>
-        </BrowserRouter>
-    </Provider>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <ModalState>
+        <App />
+      </ModalState>
+    </BrowserRouter>
+  </Provider>,
 )

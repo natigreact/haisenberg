@@ -1,19 +1,19 @@
 export interface IRating {
-    rate: number
-    count: number
+  rate: number
+  count: number
 }
 
 export interface IProduct {
-    _id?: number
-    title: string
-    price: number
-    description: string
-    category: string
-    image: string
-    rating?: IRating
+  _id?: number
+  title: string
+  price: number
+  description: string
+  category: string
+  image: string
+  rating?: IRating
 }
 
 export interface IUser {
-    name: string
-    password: string
+  name: string
+  password: string
 }

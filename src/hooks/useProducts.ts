@@ -3,31 +3,31 @@ import { IProduct } from '../types/types'
 import axios, { AxiosError } from 'axios'
 
 export const useProducts = () => {
-    const [products, setProducts] = useState<IProduct[]>([])
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState('')
+  const [products, setProducts] = useState<IProduct[]>([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
-    const addProduct = (product: IProduct) => {
-        setProducts(prev => [...prev, product])
+  const addProduct = (product: IProduct) => {
+    setProducts(prev => [...prev, product])
+  }
+
+  const fetchProducts = async () => {
+    try {
+      setError('')
+      setLoading(true)
+      const response = await axios.get<IProduct[]>('http://localhost:4200/api/products')
+      setProducts(response.data)
+      setLoading(false)
+    } catch (e: unknown) {
+      const error = e as AxiosError
+      setLoading(false)
+      setError(error.message)
     }
+  }
 
-    const fetchProducts = async () => {
-        try {
-            setError('')
-            setLoading(true)
-            const response = await axios.get<IProduct[]>('http://localhost:4200/api/products')
-            setProducts(response.data)
-            setLoading(false)
-        } catch (e: unknown) {
-            const error = e as AxiosError
-            setLoading(false)
-            setError(error.message)
-        }
-    }
+  useEffect(() => {
+    fetchProducts()
+  }, [])
 
-    useEffect(() => {
-        fetchProducts()
-    }, [])
-
-    return { products, loading, error, addProduct }
+  return { products, loading, error, addProduct }
 }
