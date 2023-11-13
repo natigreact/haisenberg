@@ -3,7 +3,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { Link, NavLink } from 'react-router-dom'
 import { useTypedDispatch, useTypedSelector } from '../hooks/useTypedSelector'
-import { authSlice } from '../store/slices/authSlice'
+import { logout } from '../store/actions/authActions'
 
 const navigation = [
   { id: 1, name: 'Home', link: '/', current: true },
@@ -27,7 +27,7 @@ export const Navigation = () => {
 
   const signOut = (e: React.SyntheticEvent<EventTarget>) => {
     e.preventDefault()
-    dispatch(authSlice.actions.logout())
+    dispatch(logout())
   }
 
   return (

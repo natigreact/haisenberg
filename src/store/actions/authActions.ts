@@ -24,3 +24,14 @@ export const login = (data: AuthData) => {
     }
   }
 }
+
+export const logout = () => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      await axios.post<AuthResponse>('/logout')
+      dispatch(authSlice.actions.logout())
+    } catch (e) {
+      console.log('error', e)
+    }
+  }
+}
