@@ -1,7 +1,5 @@
 import React from 'react'
 
-export const Loader = () => {
-  return (
-    <p className='text-center'>Loading...</p>
-  )
-}
+export const Loader = () => (
+  <p className='text-center'>Loading...</p>
+)

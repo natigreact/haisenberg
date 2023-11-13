@@ -15,7 +15,6 @@ export const Search = () => {
         search: debounced,
       },
     })
-    /*setProducts(response.mockedData)*/
   }
 
   useEffect(() => {

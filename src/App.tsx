@@ -14,7 +14,7 @@ export const App = () => {
   return (
     <>
       {isAuth ? (
-        <>
+        <div className='bg-amber-500'>
           <Navigation />
           <Routes>
             <Route path='/' element={<HomePage />} />
@@ -22,11 +22,10 @@ export const App = () => {
             <Route path='/products/:id' element={<ProductDetailPage />} />
             <Route path='/settings' element={<SettingsPage />} />
           </Routes>
-        </>
+        </div>
       ) : (
         <LoginPage />
-      )
-      }
+      )}
     </>
   )
 }

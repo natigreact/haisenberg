@@ -35,7 +35,7 @@ export const ProductsPage: React.FC = () => {
       <Filter setFilteredProducts={setFilteredProducts} />
       {loading && <Loader />}
       {error && <ErrorMessage error={error} />}
-      <div className='border py-2 rounded flex flex-col items-center mb-2'>
+      <div className='py-2 rounded flex flex-col items-center gap-2'>
         {allProducts.map((product, index) => <Product product={product} key={index} />)}
       </div>
       {modal &&

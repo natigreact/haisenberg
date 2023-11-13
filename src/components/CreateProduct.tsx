@@ -26,7 +26,6 @@ export const CreateProduct: React.FC<ICreateProductProps> = ({ onCreate }) => {
 
   const onSubmit: SubmitHandler<ICreateProductInputs> =
     (throttle(async ({ title, price, description, image, category }: ICreateProductInputs): Promise<void> => {
-
       const productData: ICreateProductInputs = {
         title,
         price,

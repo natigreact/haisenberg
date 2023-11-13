@@ -3,7 +3,7 @@ import { useTypedSelector } from '../hooks/useTypedSelector'
 import { IProduct } from '../types/types'
 
 interface IFilterProps {
-  setFilteredProducts: Dispatch<SetStateAction<IProduct[]>>;
+  setFilteredProducts: Dispatch<SetStateAction<IProduct[]>>
 }
 
 export const Filter: React.FC<IFilterProps> = ({ setFilteredProducts }: IFilterProps) => {

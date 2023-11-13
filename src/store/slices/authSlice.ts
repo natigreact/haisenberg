@@ -12,8 +12,6 @@ const initialState: AuthState = {
   isAuth: Boolean(localStorage.getItem(USERNAME_KEY)),
 }
 
-console.log('isAuth', initialState.isAuth)
-
 interface AuthPayload {
   username: string
 }

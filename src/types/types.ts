@@ -17,3 +17,10 @@ export interface IUser {
   name: string
   password: string
 }
+
+export interface INavigation {
+  id: number
+  name: string
+  link: string
+  current: boolean
+}
